@@ -58,7 +58,9 @@ Avaliable functions:
 	get_speed() - returns the speed of the tello (not the speed the tello is currently moving at, but the speed it is set to move at)
 	get_flight_time() - returns the time that the tello has been in the air
 """
-
+# CS4Me Project - Drone Competition and Hack-a-thon
+# Jason Eissayou, Alonso Rios, 
+# Stefin Racho, Victoria Zepeda, Sherly Yaghoubi
 import tello
 import time
 import logging
@@ -71,12 +73,65 @@ t = tello.Tello()
 try:
 	start_battery = t.get_battery()
 	print("Battery percentage: %s" % start_battery)
+
+	# Starts the takeoff
 	t.takeoff()
+
+	# Waits half a second for input
+	time.sleep(1.5)
+
+	# Adjust height down 12in (30.5cm)
+	t.move_down(30.5)
+
+	# Waits half a second
 	time.sleep(0.5)
-	t.move_up(100)
-	t.flip("f")
-	t.flip("b")
-	t.rotate_cw(180)
+
+	# Moves forward 23in (58.4cm)
+	# Taking off and aligning
+	t.move_forward(58.4)
+	
+	# Waits half a second
+	time.sleep(0.5)
+
+	# Rotates clockwise 90 degrees
+	t.rotate_cw(90)
+
+	# Waits half a second
+	time.sleep(0.5)
+
+	# Moves forward 140in (355.6cm)
+	# Moving through the first obstacle
+	t.move_forward(358.1)
+
+	# Waits half a second
+	time.sleep(0.5)
+
+	# Rotate counter-clockwise 90 degrees
+	# Lines up drone for next obstacle
+	t.rotate_cw(270)
+
+	# Waits half a second
+	time.sleep(0.5)
+
+	# Finished Obstacle 1, Time to go through obstacle 2
+
+	# Move forward 74in (188cm)
+	# Moves through the second obstacle
+	t.move_forward(188)
+
+	# Waits half a second
+	time.sleep(0.5)
+
+	# Rotate counter-clockwise 90 degrees
+	# Line up with Hospital landing pad
+	t.rotate_cw(320)
+
+	# Move foward 37in (94 cm)
+	# Land and Finish the sequence!
+	t.move_forward(77)
+
+
+
 except Exception as e:
 	log.error(e)
 t.land()
